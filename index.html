@@ -4,25 +4,103 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Yono Games</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#06130b;color:white;font-family:Arial}
-header{text-align:center;background:#0b2515;padding:22px}
-header h1{color:#35f58a}
-nav{display:flex;gap:14px;overflow-x:auto;padding:16px;background:#10251a;position:sticky;top:0}
-nav a{color:#a8ffc5;text-decoration:none;white-space:nowrap;font-size:13px;font-weight:bold}
-section{padding:20px 14px}
-h2{color:#36ed81}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
-.card{background:#102b1b;border:1px solid #d6a500;border-radius:13px;padding:16px 10px;text-align:center}
-.emoji{font-size:42px}
+html{scroll-behavior:smooth}
+body{
+ margin:0;
+ background:#06130b;
+ color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#080808;
+ padding:22px 12px;
+ text-align:center;
+ border-bottom:2px solid #20e875;
+}
+header h1{color:#35f58a;margin:0}
+header p{color:#ccc}
+
+nav{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:10px;
+ padding:15px 8px;
+ background:#10251a;
+ position:sticky;
+ top:0;
+ z-index:10;
+}
+nav a{
+ color:#a8ffc5;
+ text-decoration:none;
+ font-size:12px;
+ font-weight:bold;
+ padding:8px;
+}
+nav a:hover{color:#fff}
+
+.hero{
+ margin:18px;
+ padding:35px 15px;
+ text-align:center;
+ border-radius:15px;
+ background:linear-gradient(135deg,#07552b,#061b0e);
+}
+.hero h2{color:#4aff91}
+
+section{padding:20px 15px}
+.title{color:#36ed81}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:13px;
+}
+.card{
+ background:#102b1b;
+ border:1px solid #b58b19;
+ border-radius:13px;
+ padding:18px 10px;
+ text-align:center;
+}
+.logo{
+ width:65px;
+ height:65px;
+ border-radius:12px;
+ object-fit:cover;
+ font-size:42px;
+}
 .card h3{color:#ffd700}
-.card p{color:#ccc;font-size:13px}
-.btn{display:block;background:#ffd700;color:#111;padding:12px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:12px}
-footer{text-align:center;background:#091e12;padding:25px;color:#aaa}
-@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card p{color:#ccc;font-size:12px}
+.btn{
+ display:block;
+ background:linear-gradient(90deg,#d99b00,#ffe45c);
+ color:black;
+ padding:12px;
+ border-radius:8px;
+ text-decoration:none;
+ font-weight:bold;
+ margin-top:12px;
+}
+.empty{color:#aaa;text-align:center}
+
+footer{
+ background:#080808;
+ text-align:center;
+ padding:25px;
+ margin-top:20px;
+ color:#aaa;
+}
+@media(min-width:700px){
+ .grid{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -32,7 +110,7 @@ footer{text-align:center;background:#091e12;padding:25px;color:#aaa}
 
 <nav>
 <a href="#explore">EXPLORE NOW</a>
-<a href="#casino">CASINO</a>
+<a href="#casino">CASINO GAMES</a>
 <a href="#dice">DICE GAMES</a>
 <a href="#cards">CARD GAMES</a>
 <a href="#mini">MINI GAMES</a>
@@ -41,43 +119,49 @@ footer{text-align:center;background:#091e12;padding:25px;color:#aaa}
 <a href="#new">NEW APPS</a>
 </nav>
 
+<div class="hero">
+<h2>WELCOME TO MY YONO GAMES</h2>
+<p>Explore All Games & Apps In One Place</p>
+<a href="#explore" class="btn">EXPLORE NOW</a>
+</div>
+
 <section id="explore">
-<h2>🔥 EXPLORE NOW</h2>
+<h2 class="title">🔥 EXPLORE ALL GAMES</h2>
 <div class="grid" id="explore-list"></div>
 </section>
 
 <section id="casino">
-<h2>🎰 CASINO GAMES</h2>
+<h2 class="title">🎰 CASINO GAMES</h2>
 <div class="grid" id="casino-list"></div>
 </section>
 
 <section id="dice">
-<h2>🎲 DICE GAMES</h2>
+<h2 class="title">🎲 DICE GAMES</h2>
 <div class="grid" id="dice-list"></div>
 </section>
 
 <section id="cards">
-<h2>🃏 CARD GAMES</h2>
+<h2 class="title">🃏 CARD GAMES</h2>
 <div class="grid" id="cards-list"></div>
 </section>
 
 <section id="mini">
-<h2>🎯 MINI GAMES</h2>
+<h2 class="title">🎯 MINI GAMES</h2>
 <div class="grid" id="mini-list"></div>
 </section>
 
 <section id="android">
-<h2>📱 ANDROID APPS</h2>
+<h2 class="title">📱 ANDROID APPS</h2>
 <div class="grid" id="android-list"></div>
 </section>
 
 <section id="gaming">
-<h2>🎮 GAMING APPS</h2>
+<h2 class="title">🎮 GAMING APPS</h2>
 <div class="grid" id="gaming-list"></div>
 </section>
 
 <section id="new">
-<h2>⭐ NEW APPS</h2>
+<h2 class="title">⭐ NEW APPS</h2>
 <div class="grid" id="new-list"></div>
 </section>
 
@@ -88,41 +172,86 @@ footer{text-align:center;background:#091e12;padding:25px;color:#aaa}
 </footer>
 
 <script>
-const games=[
+
+// CENTRAL GAME COLLECTION
+// Add every new game here.
+// All games automatically appear in every section.
+
+const games = [
+
 {
  name:"Dhan Game",
  emoji:"🎮",
- link:"https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794756436",
- categories:["explore","casino","dice","cards","mini","android","gaming","new"]
+ logo:"",
+ link:"https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794756436"
+},
+
+// ADD MORE GAMES BELOW
+
+{
+ name:"Example Game 2",
+ emoji:"🎲",
+ logo:"",
+ link:"https://example.com"
+},
+
+{
+ name:"Example Game 3",
+ emoji:"🎯",
+ logo:"",
+ link:"https://example.com"
 }
+
 ];
 
-const sections={
- explore:"explore-list",
- casino:"casino-list",
- dice:"dice-list",
- cards:"cards-list",
- mini:"mini-list",
- android:"android-list",
- gaming:"gaming-list",
- new:"new-list"
-};
+// ALL SECTIONS DISPLAY THE SAME COLLECTION
 
-function showGames(){
- for(const category in sections){
-  const container=document.getElementById(sections[category]);
+const sections = [
+ "explore-list",
+ "casino-list",
+ "dice-list",
+ "cards-list",
+ "mini-list",
+ "android-list",
+ "gaming-list",
+ "new-list"
+];
+
+function displayGames(){
+
+ sections.forEach(id=>{
+
+  const container=document.getElementById(id);
   container.innerHTML="";
-  games.filter(game=>game.categories.includes(category))
-  .forEach(game=>{
+
+  if(games.length===0){
+   container.innerHTML='<p class="empty">No games available yet.</p>';
+   return;
+  }
+
+  games.forEach(game=>{
+
    const card=document.createElement("div");
    card.className="card";
 
-   const emoji=document.createElement("div");
-   emoji.className="emoji";
-   emoji.textContent=game.emoji;
+   if(game.logo){
+    const img=document.createElement("img");
+    img.className="logo";
+    img.src=game.logo;
+    img.alt=game.name;
+    card.appendChild(img);
+   }else{
+    const emoji=document.createElement("div");
+    emoji.className="logo";
+    emoji.textContent=game.emoji || "🎮";
+    card.appendChild(emoji);
+   }
 
    const title=document.createElement("h3");
    title.textContent=game.name;
+
+   const description=document.createElement("p");
+   description.textContent="Explore "+game.name;
 
    const button=document.createElement("a");
    button.className="btn";
@@ -131,12 +260,17 @@ function showGames(){
    button.target="_blank";
    button.rel="noopener noreferrer";
 
-   card.append(emoji,title,button);
+   card.append(title,description,button);
    container.appendChild(card);
+
   });
- }
+
+ });
 }
-showGames();
+
+displayGames();
+
 </script>
+
 </body>
 </html>

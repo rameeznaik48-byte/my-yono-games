@@ -1,137 +1,138 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Yono Games</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY YONO GAMES</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#edf3ef;color:#172033}
-header{background:#12472d;color:white;padding:18px 16px;border-bottom:4px solid #e8b83d;display:flex;align-items:center;justify-content:space-between}
-.brand{font-size:25px;font-weight:bold}
-.brand span{color:#ffda52}
-.menu{font-size:28px}
-.container{padding:20px 15px;max-width:850px;margin:auto}
-.search{width:100%;padding:16px 18px;border:1px solid #d9e2dc;border-radius:35px;font-size:16px;margin-bottom:25px}
-h1{font-size:27px;margin:5px 0 10px}
-.sub{color:#737d80;line-height:1.5;margin-bottom:20px}
-.telegram{display:block;background:#164b30;color:white;text-decoration:none;text-align:center;padding:15px;border-radius:12px;font-weight:bold;margin-bottom:20px}
-.tabs{display:flex;background:#dce7df;padding:6px;border-radius:16px;gap:5px;margin-bottom:25px}
-.tab{flex:1;border:0;background:transparent;padding:14px 5px;border-radius:12px;font-weight:bold;font-size:14px;color:#19432e}
-.tab.active{background:#164b30;color:white}
-.game{background:white;border:1px solid #e1e8e3;border-radius:22px;padding:17px;margin-bottom:17px;display:flex;align-items:center;gap:14px;position:relative;box-shadow:0 4px 12px #00000008}
-.logo{width:82px;height:82px;flex-shrink:0;border-radius:20px;background:#145032;color:#ffe35b;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:900;text-align:center;padding:5px}
-.info{flex:1;min-width:0}
-.info h2{font-size:21px;margin:0 0 7px}
-.info p{margin:0 0 8px;color:#777;font-size:15px}
-.bonus{font-weight:bold;color:#205c38;font-size:15px}
-.download{background:#164b30;color:white;text-decoration:none;padding:14px 16px;border-radius:14px;font-weight:bold;white-space:nowrap}
-.hot{position:absolute;right:0;top:0;background:#d9232e;color:white;font-size:12px;padding:7px 12px;border-radius:0 20px 0 12px;font-weight:bold}
-.hidden{display:none}
-footer{text-align:center;color:#778078;padding:25px;font-size:13px}
-@media(max-width:420px){
- .game{padding:13px;gap:10px}
- .logo{width:68px;height:68px;font-size:16px}
- .info h2{font-size:18px}
- .info p{font-size:13px}
- .bonus{font-size:13px}
- .download{padding:12px 11px;font-size:13px}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#071b12;
+ color:white;
 }
+header{
+ background:linear-gradient(135deg,#00a85a,#075b35);
+ text-align:center;
+ padding:25px 10px;
+}
+header h1{margin:0;font-size:27px}
+header p{margin:8px 0 0}
+.search{
+ width:90%;
+ max-width:500px;
+ display:block;
+ margin:20px auto;
+ padding:14px;
+ border-radius:25px;
+ border:0;
+ font-size:16px;
+}
+h2{text-align:center;color:#38e58b}
+.games{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+ gap:15px;
+ padding:15px;
+ max-width:650px;
+ margin:auto;
+}
+.game{
+ background:#103c29;
+ border:1px solid #16864d;
+ border-radius:15px;
+ padding:18px 10px;
+ text-align:center;
+}
+.logo{
+ width:85px;
+ height:85px;
+ margin:auto;
+ border-radius:22px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-size:22px;
+ font-weight:900;
+ box-shadow:0 4px 12px #0008;
+}
+.dhan{background:linear-gradient(135deg,#ffdf43,#e77700);color:#662900}
+.spin{background:linear-gradient(135deg,#ff4b4b,#9e001c);color:white}
+.max{background:linear-gradient(135deg,#31d8ff,#1648c9);color:white}
+.game h3{margin:15px 0 12px}
+.play{
+ display:block;
+ background:#00c66b;
+ color:white;
+ text-decoration:none;
+ padding:11px;
+ border-radius:25px;
+ font-weight:bold;
+}
+.telegram{
+ display:block;
+ background:#168de0;
+ color:white;
+ text-decoration:none;
+ text-align:center;
+ margin:25px auto;
+ padding:15px;
+ width:90%;
+ max-width:450px;
+ border-radius:30px;
+ font-weight:bold;
+}
+footer{text-align:center;padding:20px;color:#9bb9a8}
 </style>
 </head>
+
 <body>
 
 <header>
- <div class="brand">MY YONO <span>GAMES</span></div>
- <div class="menu">☰</div>
+<h1>MY YONO GAMES</h1>
+<p>WELCOME TO MY GAMING WORLD</p>
 </header>
 
-<main class="container">
+<input class="search" id="search" placeholder="Search your favourite game..." oninput="searchGames()">
 
-<input class="search" id="search" type="search" placeholder="🔍 Search Yono Games..." oninput="filterGames()">
+<h2>ALL YONO GAMES</h2>
 
-<h1>All Yono <span style="color:#205c38">Games</span> (2026)</h1>
-<p class="sub">Explore your favourite gaming apps and find their official links in one place.</p>
+<div class="games" id="games">
+
+<div class="game">
+<div class="logo dhan">DHAN<br>GAME</div>
+<h3>Dhan Game</h3>
+<a class="play" href="https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794749189" target="_blank">PLAY NOW</a>
+</div>
+
+<div class="game">
+<div class="logo spin">SPIN<br>RUMMY</div>
+<h3>Spin Rummy</h3>
+<a class="play" href="https://spinrummy.now/?code=R3JYKZUQ8L" target="_blank">PLAY NOW</a>
+</div>
+
+<div class="game">
+<div class="logo max">MAX<br>RUMMY</div>
+<h3>Max Rummy</h3>
+<a class="play" href="https://www.maxrummy333.com/?code=QUMDSJAKAPY&t=1794749151" target="_blank">PLAY NOW</a>
+</div>
+
+</div>
 
 <a class="telegram" href="https://t.me/rameeznaikontop" target="_blank">
 ✈ JOIN OUR TELEGRAM CHANNEL
 </a>
 
-<div class="tabs">
- <button class="tab active" onclick="showTab('all',this)">All Yono Games (3)</button>
- <button class="tab" onclick="showTab('new',this)">New Yono Apps (3)</button>
-</div>
-
-<div id="games">
-
-<div class="game" data-name="spinrummy" data-type="all new">
- <span class="hot">🔥 HOT</span>
- <div class="logo">SPIN<br>RUMMY</div>
- <div class="info">
-  <h2>Spin Rummy</h2>
-  <p>Yono Gaming App</p>
-  <div class="bonus">Official Link</div>
- </div>
- <a class="download" href="https://spinrummy.now/?code=R3JYKZUQ8L" target="_blank">Download</a>
-</div>
-
-<div class="game" data-name="maxrummy" data-type="all new">
- <span class="hot">🔥 HOT</span>
- <div class="logo">MAX<br>RUMMY</div>
- <div class="info">
-  <h2>Max Rummy</h2>
-  <p>Yono Gaming App</p>
-  <div class="bonus">Official Link</div>
- </div>
- <a class="download" href="https://www.maxrummy333.com/?code=QUMDSJAKAPY&t=1794749151" target="_blank">Download</a>
-</div>
-
-<div class="game" data-name="dhan game" data-type="all new">
- <span class="hot">🔥 HOT</span>
- <div class="logo">DHAN<br>GAME</div>
- <div class="info">
-  <h2>Dhan Game</h2>
-  <p>Yono Gaming App</p>
-  <div class="bonus">Official Link</div>
- </div>
- <a class="download" href="https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794749189" target="_blank">Download</a>
-</div>
-
-</div>
-
-<p id="empty" style="display:none;text-align:center;color:#777">No games found.</p>
-
-<footer>
-My Yono Games © 2026<br>
-Please verify app authenticity, applicable laws and age restrictions before using any gaming service.
-</footer>
-
-</main>
+<footer>© 2026 MY YONO GAMES</footer>
 
 <script>
-let currentTab="all";
-
-function showTab(type,button){
- currentTab=type;
- document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
- button.classList.add("active");
- filterGames();
-}
-
-function filterGames(){
- let q=document.getElementById("search").value.toLowerCase();
- let count=0;
-
+function searchGames(){
+ let value=document.getElementById("search").value.toLowerCase();
  document.querySelectorAll(".game").forEach(game=>{
-  let name=game.dataset.name;
-  let type=game.dataset.type.split(" ");
-  let visible=name.includes(q) && type.includes(currentTab);
-  game.classList.toggle("hidden",!visible);
-  if(visible) count++;
+  game.style.display=game.innerText.toLowerCase().includes(value)?"block":"none";
  });
-
- document.getElementById("empty").style.display=count?"none":"block";
 }
 </script>
 

@@ -331,3 +331,211 @@ function login(){
 }
 </style>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Yono Games</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#06130b;
+ color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#0b2515;
+ text-align:center;
+ padding:22px;
+ color:#35f58a;
+}
+nav{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:15px;
+ padding:16px;
+ background:#10251a;
+ position:sticky;
+ top:0;
+}
+nav a{
+ color:#a8ffc5;
+ text-decoration:none;
+ font-weight:bold;
+}
+section{padding:20px 15px}
+h2{color:#36ed81}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:14px;
+}
+.card{
+ background:#102b1b;
+ border:1px solid #d6a500;
+ border-radius:13px;
+ padding:18px 10px;
+ text-align:center;
+}
+.card img{
+ width:75px;
+ height:75px;
+ object-fit:contain;
+ border-radius:12px;
+}
+.card h3{color:#ffd700}
+.card p{color:#ccc;font-size:13px}
+.btn{
+ display:block;
+ background:#16c65d;
+ color:black;
+ padding:12px;
+ border-radius:8px;
+ text-decoration:none;
+ font-weight:bold;
+ margin-top:12px;
+}
+footer{
+ text-align:center;
+ padding:25px;
+ background:#091e12;
+}
+@media(min-width:700px){
+ .grid{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🎮 MY YONO GAMES</h1>
+<p>GAMES • APPS • ENTERTAINMENT</p>
+</header>
+
+<nav>
+<a href="#explore">EXPLORE NOW</a>
+<a href="#casino">CASINO</a>
+<a href="#dice">DICE GAMES</a>
+<a href="#cards">CARD GAMES</a>
+<a href="#mini">MINI GAMES</a>
+<a href="#android">ANDROID APPS</a>
+</nav>
+
+<section id="explore">
+<h2>🔥 EXPLORE NOW</h2>
+<div class="grid" id="explore-list"></div>
+</section>
+
+<section id="casino">
+<h2>🎰 CASINO GAMES</h2>
+<div class="grid" id="casino-list"></div>
+</section>
+
+<section id="dice">
+<h2>🎲 DICE GAMES</h2>
+<div class="grid" id="dice-list"></div>
+</section>
+
+<section id="cards">
+<h2>🃏 CARD GAMES</h2>
+<div class="grid" id="cards-list"></div>
+</section>
+
+<section id="mini">
+<h2>🎯 MINI GAMES</h2>
+<div class="grid" id="mini-list"></div>
+</section>
+
+<section id="android">
+<h2>📱 ANDROID APPS</h2>
+<div class="grid" id="android-list"></div>
+</section>
+
+<section id="gaming">
+<h2>🎮 GAMING APPS</h2>
+<div class="grid" id="gaming-list"></div>
+</section>
+
+<section id="new">
+<h2>⭐ NEW APPS</h2>
+<div class="grid" id="new-list"></div>
+</section>
+
+<footer>
+<h3>MY YONO GAMES</h3>
+<p>Games • Apps • Entertainment</p>
+<p>© 2026 All Rights Reserved</p>
+</footer>
+
+<script>
+
+// Add your games here.
+// Each game automatically appears
+// in all its selected categories.
+
+const games = [
+{
+ name:"Dhan Game",
+ emoji:"🎮",
+ link:"https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794756436",
+ categories:[
+ "explore","casino","dice","cards",
+ "mini","android","gaming","new"
+ ]
+ }
+];
+
+const sections = {
+ explore:"explore-list",
+ casino:"casino-list",
+ dice:"dice-list",
+ cards:"cards-list",
+ mini:"mini-list",
+ android:"android-list",
+ gaming:"gaming-list",
+ new:"new-list"
+};
+
+function showGames(){
+ Object.keys(sections).forEach(category=>{
+  const container=document.getElementById(sections[category]);
+  container.innerHTML="";
+
+  games.filter(game=>
+   game.categories.includes(category)
+  ).forEach(game=>{
+   const card=document.createElement("div");
+   card.className="card";
+
+   const emoji=document.createElement("div");
+   emoji.style.fontSize="45px";
+   emoji.textContent=game.emoji;
+
+   const title=document.createElement("h3");
+   title.textContent=game.name;
+
+   const button=document.createElement("a");
+   button.className="btn";
+   button.textContent="PLAY NOW";
+   button.href=game.link;
+   button.target="_blank";
+   button.rel="noopener noreferrer";
+
+   card.append(emoji,title,button);
+   container.appendChild(card);
+  });
+ });
+}
+
+showGames();
+
+</script>
+</body>
+</html>
+
+

@@ -1,35 +1,117 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Yono Games - Explore Games</title>
+<title>My Yono Games</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080811;color:white;font-family:Arial,sans-serif}
-header{padding:22px 15px;text-align:center;background:#111122;border-bottom:2px solid #8b35ff}
-header h1{margin:0;color:#c084fc;font-size:28px}
-header p{color:#ccc}
-.hero{text-align:center;padding:55px 15px 40px;background:linear-gradient(135deg,#160d2b,#080811)}
-.hero h2{font-size:32px;margin:0 0 12px}
-.hero p{color:#ccc}
-.btn{display:inline-block;background:#8b35ff;color:white;text-decoration:none;padding:12px 22px;border-radius:8px;font-weight:bold;margin:8px}
-.btn:hover{background:#a65cff}
-section{padding:25px 15px;max-width:1100px;margin:auto}
-section h2{text-align:center;color:#c084fc}
-.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
-.category{background:#171326;border:1px solid #6734a6;border-radius:12px;padding:18px 10px;text-align:center}
-.category h3{margin:5px 0;color:#d8b4fe}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.game{background:#151322;border:1px solid #6e35b5;border-radius:14px;padding:18px;text-align:center}
-.game img{width:95px;height:95px;object-fit:contain;border-radius:12px;background:#050505}
-.game h3{color:#d8b4fe}
-.game p{color:#bbb;font-size:14px}
-.play{display:inline-block;background:#8b35ff;color:white;text-decoration:none;padding:11px 25px;border-radius:8px;font-weight:bold}
-.play:hover{background:#a65cff}
-footer{text-align:center;padding:25px;color:#999;background:#111}
+body{
+ margin:0;
+ background:#080808;
+ color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#111;
+ padding:22px;
+ text-align:center;
+ border-bottom:2px solid #a020f0;
+}
+header h1{color:#c084fc;margin:0}
+header p{color:#bbb}
+.hero{
+ text-align:center;
+ padding:55px 15px;
+ background:linear-gradient(135deg,#240044,#080808);
+}
+.hero h2{font-size:30px}
+.hero p{color:#ddd}
+.btn{
+ display:inline-block;
+ padding:13px 22px;
+ margin:8px;
+ background:#8b35ff;
+ color:white;
+ text-decoration:none;
+ border-radius:8px;
+ font-weight:bold;
+}
+section{
+ max-width:1100px;
+ margin:auto;
+ padding:25px 15px;
+}
+h2{text-align:center;color:#d8a5ff}
+.categories{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+}
+.category{
+ background:#17121f;
+ border:1px solid #8b35ff;
+ border-radius:12px;
+ padding:18px 8px;
+ text-align:center;
+ color:white;
+ cursor:pointer;
+ font-size:15px;
+ font-weight:bold;
+}
+.category.active{
+ background:#7020c9;
+}
+.games{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:15px;
+}
+.game{
+ background:#17121f;
+ border:1px solid #8b35ff;
+ border-radius:15px;
+ padding:22px;
+ text-align:center;
+}
+.logo{
+ width:105px;
+ height:105px;
+ margin:auto;
+ background:#000;
+ border:2px solid #a855f7;
+ border-radius:18px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:19px;
+ font-weight:bold;
+ color:#fff;
+ text-align:center;
+}
+.logo span{color:#c084fc}
+.game h3{color:#d8a5ff}
+.game p{color:#bbb}
+.play{
+ display:inline-block;
+ padding:12px 28px;
+ background:#8b35ff;
+ color:white;
+ text-decoration:none;
+ border-radius:8px;
+ font-weight:bold;
+}
+footer{
+ background:#111;
+ text-align:center;
+ padding:25px;
+ color:#aaa;
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -39,57 +121,81 @@ footer{text-align:center;padding:25px;color:#999;background:#111}
 
 <div class="hero">
 <h2>Welcome to My Yono Games</h2>
-<p>Explore your favourite games in one place!</p>
+<p>Explore Your Favourite Games in One Place!</p>
 <a class="btn" href="#games">Explore Now</a>
 <a class="btn" href="#games">Play Now</a>
 </div>
 
 <section>
 <h2>Explore Categories</h2>
+
 <div class="categories">
-<div class="category"><h3>🎰 Casino Games</h3></div>
-<div class="category"><h3>🎲 Dice Games</h3></div>
-<div class="category"><h3>🃏 Card Games</h3></div>
-<div class="category"><h3>🎮 Mini Games</h3></div>
+<button class="category active" onclick="showGame('All')">🎮 All Games</button>
+<button class="category" onclick="showGame('Casino Games')">🎰 Casino Games</button>
+<button class="category" onclick="showGame('Dice Games')">🎲 Dice Games</button>
+<button class="category" onclick="showGame('Card Games')">🃏 Card Games</button>
+<button class="category" onclick="showGame('Mini Games')">🎮 Mini Games</button>
 </div>
 </section>
 
 <section id="games">
-<h2>All Games</h2>
-<div class="games">
+<h2 id="gameHeading">All Games</h2>
 
-<div class="game">
-<img src="dhan-game-logo.png" alt="Dhan Game Logo" onerror="this.style.display='none'">
-<h3>Dhan Game</h3>
-<p>Casino Games</p>
-<a class="play" href="https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794756436" target="_blank" rel="noopener">Play Now</a>
+<div class="games" id="gameList">
+
+<div class="game" data-categories="Casino Games,Dice Games,Card Games,Mini Games">
+
+<div class="logo">
+<div>DHAN<br><span>GAME</span></div>
 </div>
 
-<div class="game">
-<img src="dhan-game-logo.png" alt="Dhan Game Logo" onerror="this.style.display='none'">
 <h3>Dhan Game</h3>
-<p>Dice Games</p>
-<a class="play" href="https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794756436" target="_blank" rel="noopener">Play Now</a>
-</div>
+<p>Casino • Dice • Card • Mini Games</p>
 
-<div class="game">
-<img src="dhan-game-logo.png" alt="Dhan Game Logo" onerror="this.style.display='none'">
-<h3>Dhan Game</h3>
-<p>Card Games</p>
-<a class="play" href="https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794756436" target="_blank" rel="noopener">Play Now</a>
-</div>
+<a class="play"
+href="https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794756436"
+target="_blank"
+rel="noopener noreferrer">
+Play Now
+</a>
 
-<div class="game">
-<img src="dhan-game-logo.png" alt="Dhan Game Logo" onerror="this.style.display='none'">
-<h3>Dhan Game</h3>
-<p>Mini Games</p>
-<a class="play" href="https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794756436" target="_blank" rel="noopener">Play Now</a>
 </div>
 
 </div>
 </section>
 
-<footer>© 2026 My Yono Games</footer>
+<footer>
+© 2026 My Yono Games
+</footer>
+
+<script>
+function showGame(category){
+
+ const game=document.querySelector('.game');
+ const buttons=document.querySelectorAll('.category');
+ const heading=document.getElementById('gameHeading');
+
+ buttons.forEach(button=>{
+   button.classList.toggle(
+     'active',
+     button.textContent.includes(category)
+   );
+ });
+
+ if(category==='All'){
+   game.style.display='block';
+   heading.textContent='All Games';
+ }else{
+   const categories=game.dataset.categories.split(',');
+   game.style.display=categories.includes(category)?'block':'none';
+   heading.textContent=category;
+ }
+
+ document.getElementById('games').scrollIntoView({
+   behavior:'smooth'
+ });
+}
+</script>
 
 </body>
 </html>

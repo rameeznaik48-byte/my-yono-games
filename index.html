@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Yono Games</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090612;color:white;font-family:Arial,sans-serif}
+header{padding:25px 15px;text-align:center;background:#160b29;border-bottom:2px solid #a855f7}
+h1{color:#c084fc;margin:0;font-size:30px}
+header p{color:#ccc}
+.search{display:block;width:90%;max-width:500px;margin:25px auto;padding:14px;border-radius:12px;border:1px solid #a855f7;background:#170e25;color:white;font-size:16px}
+h2{text-align:center;color:#c084fc}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;padding:20px;max-width:1000px;margin:auto}
+.card{background:#190f29;border:1px solid #7134a5;border-radius:16px;padding:22px;text-align:center;box-shadow:0 0 12px #542080}
+.card h3{color:#d8b4fe}
+.card p{color:#ccc}
+.btn{display:inline-block;background:#9333ea;color:white;padding:12px 22px;border-radius:9px;text-decoration:none;font-weight:bold}
+footer{text-align:center;padding:25px;color:#aaa}
+</style>
+</head>
+<body>
+<header>
+<h1>🎮 MY YONO GAMES</h1>
+<p>Explore Apps, Games & Latest Offers</p>
+</header>
+
+<input class="search" id="search" placeholder="🔍 Search games..." oninput="searchGames()">
+
+<h2>🔥 Explore Games</h2>
+<div class="games" id="games">
+<div class="card"><h3>Popular Games</h3><p>Discover exciting games here.</p><a class="btn" href="#contact">Explore</a></div>
+<div class="card"><h3>Latest Apps</h3><p>Find the latest apps and updates.</p><a class="btn" href="#contact">Explore</a></div>
+<div class="card"><h3>New Offers</h3><p>Check out the latest offers.</p><a class="btn" href="#contact">Explore</a></div>
+</div>
+<footer id="contact">© 2026 My Yono Games | All Rights Reserved</footer>
+
+<script>
+function searchGames(){
+let q=document.getElementById('search').value.toLowerCase();
+document.querySelectorAll('.card').forEach(card=>{
+card.style.display=card.innerText.toLowerCase().includes(q)?'block':'none';
+});
+}
+</script>
+</body>
+</html>

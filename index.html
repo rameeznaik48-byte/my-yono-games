@@ -1,50 +1,159 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meri Website</title>
-    <style>
-        /* पूरी वेबसाइट का बैकग्राउंड रंग हरा (Green) करने के लिए */
-        body {
-            background-color: #16a34a; /* गहरा हरा रंग (आप चाहें तो 'green' या '#22c55e' भी लिख सकते हैं) */
-            color: white; /* टेक्स्ट का रंग सफेद ताकि हरे पर साफ दिखे */
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 100px;
-            margin: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YONO GAMES 365</title>
 
-        /* टेलीग्राम बटन का डिज़ाइन */
-        .telegram-btn {
-            display: inline-block;
-            background-color: #0088cc; /* टेलीग्राम का असली नीला रंग */
-            color: white;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-top: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
-        }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        /* माउस ले जाने पर बटन का रंग थोड़ा बदलेगा */
-        .telegram-btn:hover {
-            background-color: #006699;
-        }
-    </style>
+body {
+  background: #06140c;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #0b2515;
+  padding: 22px 15px;
+  text-align: center;
+  border-bottom: 2px solid #20d66b;
+}
+
+header h1 {
+  color: #20e875;
+  font-size: 27px;
+}
+
+header p {
+  color: #a8d9b8;
+  margin-top: 7px;
+}
+
+.balance {
+  margin: 20px;
+  padding: 25px;
+  background: linear-gradient(135deg,#124d2b,#087b3a);
+  border-radius: 15px;
+  text-align: center;
+}
+
+.balance h2 {
+  font-size: 15px;
+}
+
+.balance h1 {
+  font-size: 35px;
+  margin-top: 10px;
+  color: #aaffc4;
+}
+
+.container {
+  padding: 15px;
+}
+
+.title {
+  color: #27e879;
+  margin-bottom: 15px;
+}
+
+.games {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 14px;
+}
+
+.game {
+  background: #10281a;
+  padding: 25px 10px;
+  border-radius: 13px;
+  text-align: center;
+  border: 1px solid #1c693b;
+}
+
+.game span {
+  font-size: 35px;
+}
+
+.game h3 {
+  margin-top: 10px;
+  color: #6dffa0;
+}
+
+.telegram {
+  display: block;
+  background: #16a34a;
+  color: white;
+  text-align: center;
+  padding: 17px;
+  margin: 25px 15px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #8aa995;
+}
+</style>
 </head>
+
 <body>
 
-    <h1>हमारी वेबसाइट पर आपका स्वागत है!</h1>
-    <p>ताज़ा अपडेट्स और ऑफर्स के लिए हमारे टेलीग्राम चैनल से जुड़ें।</p>
+<header>
+  <h1>🎰 YONO GAMES 365</h1>
+  <p>Gaming • Rewards • Entertainment</p>
+</header>
 
-    <!-- Telegram Channel Link Button -->
-    <a href="https://t.me" target="_blank" class="telegram-btn">
-        Join Telegram Channel
-    </a>
+<div class="balance">
+  <h2>YOUR VIRTUAL BALANCE</h2>
+  <h1>🪙 0.000</h1>
+</div>
+
+<div class="container">
+  <h2 class="title">🔥 POPULAR GAMES</h2>
+
+  <div class="games">
+    <div class="game">
+      <span>🎰</span>
+      <h3>Casino Demo</h3>
+    </div>
+
+    <div class="game">
+      <span>🎲</span>
+      <h3>Dice Demo</h3>
+    </div>
+
+    <div class="game">
+      <span>🃏</span>
+      <h3>Card Games</h3>
+    </div>
+
+    <div class="game">
+      <span>🎮</span>
+      <h3>Mini Games</h3>
+    </div>
+  </div>
+</div>
+
+<a class="telegram"
+href="https://t.me/rameeznaikontop"
+target="_blank">
+✈ JOIN OUR TELEGRAM CHANNEL
+</a>
+
+<footer>
+  © 2026 YONO GAMES 365
+  <p>For entertainment only • Virtual coins have no cash value</p>
+</footer>
 
 </body>
-</html>
+        </html>
+    

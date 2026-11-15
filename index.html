@@ -1,103 +1,139 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>       
- <meta name="google-site-verification" content="TRN8b9N48WjPxPfQojwJpCpGM2qrpfIAOqb8Fq9Ia4k" /> 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My Yono Games</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090612;color:white;font-family:Arial,sans-serif}
-header{padding:25px 15px;text-align:center;background:#160b29;border-bottom:2px solid #a855f7}
-h1{color:#c084fc;margin:0;font-size:30px}
-header p{color:#ccc}
-.search{display:block;width:90%;max-width:500px;margin:25px auto;padding:14px;border-radius:12px;border:1px solid #a855f7;background:#170e25;color:white;font-size:16px}
-h2{text-align:center;color:#c084fc}
-.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;padding:20px;max-width:1000px;margin:auto}
-.card{background:#190f29;border:1px solid #7134a5;border-radius:16px;padding:22px;text-align:center;box-shadow:0 0 12px #542080}
-.card h3{color:#d8b4fe}
-.card p{color:#ccc}
-.btn{display:inline-block;background:#9333ea;color:white;padding:12px 22px;border-radius:9px;text-decoration:none;font-weight:bold}
-footer{text-align:center;padding:25px;color:#aaa}
+body{margin:0;font-family:Arial,sans-serif;background:#edf3ef;color:#172033}
+header{background:#12472d;color:white;padding:18px 16px;border-bottom:4px solid #e8b83d;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:25px;font-weight:bold}
+.brand span{color:#ffda52}
+.menu{font-size:28px}
+.container{padding:20px 15px;max-width:850px;margin:auto}
+.search{width:100%;padding:16px 18px;border:1px solid #d9e2dc;border-radius:35px;font-size:16px;margin-bottom:25px}
+h1{font-size:27px;margin:5px 0 10px}
+.sub{color:#737d80;line-height:1.5;margin-bottom:20px}
+.telegram{display:block;background:#164b30;color:white;text-decoration:none;text-align:center;padding:15px;border-radius:12px;font-weight:bold;margin-bottom:20px}
+.tabs{display:flex;background:#dce7df;padding:6px;border-radius:16px;gap:5px;margin-bottom:25px}
+.tab{flex:1;border:0;background:transparent;padding:14px 5px;border-radius:12px;font-weight:bold;font-size:14px;color:#19432e}
+.tab.active{background:#164b30;color:white}
+.game{background:white;border:1px solid #e1e8e3;border-radius:22px;padding:17px;margin-bottom:17px;display:flex;align-items:center;gap:14px;position:relative;box-shadow:0 4px 12px #00000008}
+.logo{width:82px;height:82px;flex-shrink:0;border-radius:20px;background:#145032;color:#ffe35b;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:900;text-align:center;padding:5px}
+.info{flex:1;min-width:0}
+.info h2{font-size:21px;margin:0 0 7px}
+.info p{margin:0 0 8px;color:#777;font-size:15px}
+.bonus{font-weight:bold;color:#205c38;font-size:15px}
+.download{background:#164b30;color:white;text-decoration:none;padding:14px 16px;border-radius:14px;font-weight:bold;white-space:nowrap}
+.hot{position:absolute;right:0;top:0;background:#d9232e;color:white;font-size:12px;padding:7px 12px;border-radius:0 20px 0 12px;font-weight:bold}
+.hidden{display:none}
+footer{text-align:center;color:#778078;padding:25px;font-size:13px}
+@media(max-width:420px){
+ .game{padding:13px;gap:10px}
+ .logo{width:68px;height:68px;font-size:16px}
+ .info h2{font-size:18px}
+ .info p{font-size:13px}
+ .bonus{font-size:13px}
+ .download{padding:12px 11px;font-size:13px}
+}
 </style>
 </head>
 <body>
+
 <header>
-<h1>🎮 MY YONO GAMES</h1>
-<p>Explore Apps, Games & Latest Offers</p>
+ <div class="brand">MY YONO <span>GAMES</span></div>
+ <div class="menu">☰</div>
 </header>
 
-<input class="search" id="search" placeholder="🔍 Search games..." oninput="searchGames()">
+<main class="container">
 
-<h2>🔥 Explore Games</h2>
-<div class="games" id="games">
-<div class="card"><h3>Popular Games</h3><p>Discover exciting games here.</p><a class="btn" href="#contact">Explore</a></div>
-<div class="card"><h3>Latest Apps</h3><p>Find the latest apps and updates.</p><a class="btn" href="#contact">Explore</a></div>
-<div class="card"><h3>New Offers</h3><p>Check out the latest offers.</p><a class="btn" href="#contact">Explore</a></div>
+<input class="search" id="search" type="search" placeholder="🔍 Search Yono Games..." oninput="filterGames()">
+
+<h1>All Yono <span style="color:#205c38">Games</span> (2026)</h1>
+<p class="sub">Explore your favourite gaming apps and find their official links in one place.</p>
+
+<a class="telegram" href="https://t.me/rameeznaikontop" target="_blank">
+✈ JOIN OUR TELEGRAM CHANNEL
+</a>
+
+<div class="tabs">
+ <button class="tab active" onclick="showTab('all',this)">All Yono Games (3)</button>
+ <button class="tab" onclick="showTab('new',this)">New Yono Apps (3)</button>
 </div>
-<footer id="contact">© 2026 My Yono Games | All Rights Reserved</footer>
+
+<div id="games">
+
+<div class="game" data-name="spinrummy" data-type="all new">
+ <span class="hot">🔥 HOT</span>
+ <div class="logo">SPIN<br>RUMMY</div>
+ <div class="info">
+  <h2>Spin Rummy</h2>
+  <p>Yono Gaming App</p>
+  <div class="bonus">Official Link</div>
+ </div>
+ <a class="download" href="https://spinrummy.now/?code=R3JYKZUQ8L" target="_blank">Download</a>
+</div>
+
+<div class="game" data-name="maxrummy" data-type="all new">
+ <span class="hot">🔥 HOT</span>
+ <div class="logo">MAX<br>RUMMY</div>
+ <div class="info">
+  <h2>Max Rummy</h2>
+  <p>Yono Gaming App</p>
+  <div class="bonus">Official Link</div>
+ </div>
+ <a class="download" href="https://www.maxrummy333.com/?code=QUMDSJAKAPY&t=1794749151" target="_blank">Download</a>
+</div>
+
+<div class="game" data-name="dhan game" data-type="all new">
+ <span class="hot">🔥 HOT</span>
+ <div class="logo">DHAN<br>GAME</div>
+ <div class="info">
+  <h2>Dhan Game</h2>
+  <p>Yono Gaming App</p>
+  <div class="bonus">Official Link</div>
+ </div>
+ <a class="download" href="https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794749189" target="_blank">Download</a>
+</div>
+
+</div>
+
+<p id="empty" style="display:none;text-align:center;color:#777">No games found.</p>
+
+<footer>
+My Yono Games © 2026<br>
+Please verify app authenticity, applicable laws and age restrictions before using any gaming service.
+</footer>
+
+</main>
 
 <script>
-function searchGames(){
-let q=document.getElementById('search').value.toLowerCase();
-document.querySelectorAll('.card').forEach(card=>{
-card.style.display=card.innerText.toLowerCase().includes(q)?'block':'none';
-});
+let currentTab="all";
+
+function showTab(type,button){
+ currentTab=type;
+ document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+ button.classList.add("active");
+ filterGames();
+}
+
+function filterGames(){
+ let q=document.getElementById("search").value.toLowerCase();
+ let count=0;
+
+ document.querySelectorAll(".game").forEach(game=>{
+  let name=game.dataset.name;
+  let type=game.dataset.type.split(" ");
+  let visible=name.includes(q) && type.includes(currentTab);
+  game.classList.toggle("hidden",!visible);
+  if(visible) count++;
+ });
+
+ document.getElementById("empty").style.display=count?"none":"block";
 }
 </script>
+
 </body>
 </html>
-<a href="https://t.me/rameeznaikontop"
-target="_blank"
-style="display:block;background:#0088cc;color:white;padding:14px;text-align:center;border-radius:10px;text-decoration:none;margin:20px;">
-📢 JOIN OUR TELEGRAM CHANNEL
-  
-  </div>
-</section>
-
-<style>
-.apps-section {
-  padding: 25px 15px;
-  text-align: center;
-}
-.apps-section h2 {
-  color: #ffffff;
-  margin-bottom: 20px;
-}
-.apps-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
-.app-card {
-  display: block;
-  background: #202b3d;
-  color: white;
-  padding: 20px 10px;
-  border-radius: 12px;
-  text-decoration: none;
-  border: 1px solid #394963;
-}
-.app-card h3 {
-  margin: 0 0 12px;
-}
-.app-card span {
-  color: #35d07f;
-  font-weight: bold;
-}
-</style>
-<a href="https://spinrummy.now/?code=R3JYKZUQ8LJ&t=1794749106" target="_blank" rel="noopener noreferrer" class="app-card">
-  <img src="https://spinrummy.now/logo.png" alt="SpinRummy Logo" style="width:80px;height:80px;object-fit:contain;display:block;margin:0 auto 12px;">
-  <h3>SpinRummy</h3>
-  <span>Visit Website →</span>
-</a>
-
-<a href="https://www.maxrummy333.com/?code=QUMDSJAKAPY&t=1794749151" target="_blank" rel="noopener noreferrer" class="app-card">
-  <img src="https://www.maxrummy333.com/logo.png" alt="Max Rummy Logo" style="width:80px;height:80px;object-fit:contain;display:block;margin:0 auto 12px;">
-  <h3>Max Rummy</h3>
-  <span>Visit Website →</span>
-</a>
-
-<a href="https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794749189" target="_blank" rel="noopener noreferrer" class="app-card">
-  <img src="https://www.dhangmaegame.com/logo.png" alt="Dhan Game Logo" style="width:80px;height:80px;object-fit:contain;display:block;margin:0 auto 12px;">
-  <h3>Dhan Game</h3>
-  <span>Visit Website →</span>
-</a>

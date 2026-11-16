@@ -105,6 +105,7 @@ function resetForm(){
 }
 $("cancel").onclick=resetForm;
 $("sendLink").onclick=async()=>{
+  options:{emailRedirectTo:location.href,shouldCreateUser:false}
   $("sendLink").disabled=true;$("loginStatus").textContent="Sending secure login link...";
   const {error}=await db.auth.signInWithOtp({
     email:ADMIN_EMAIL,

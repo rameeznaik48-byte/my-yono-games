@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Yono Games</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;background:#100d20;color:white}
+header{text-align:center;padding:30px 15px;background:linear-gradient(135deg,#26104d,#6416a8)}
+header h1{font-size:30px;margin-bottom:8px}.container{max-width:1000px;margin:auto;padding:20px 15px}
+.search{width:100%;padding:14px;border-radius:10px;border:1px solid #65439b;background:#211a35;color:white;font-size:16px;margin-bottom:18px}
+.categories{display:flex;gap:10px;overflow-x:auto;padding-bottom:15px}
+.categories button{flex-shrink:0;border:0;padding:11px 17px;border-radius:20px;background:#302447;color:white;cursor:pointer}
+.categories button.active,.categories button:hover{background:#8738df}
+h2{margin:20px 0 15px}.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:15px}
+.game-card{background:#211a35;border:1px solid #49366b;border-radius:14px;padding:12px;text-align:center;overflow:hidden}
+.game-image{width:100%;height:125px;object-fit:cover;border-radius:10px;margin-bottom:12px;background:#302447}
+.game-icon{font-size:42px;padding:22px;background:#302447;border-radius:10px;margin-bottom:12px}
+.game-card h3{margin-bottom:8px;overflow-wrap:anywhere}.game-card p{color:#c5bad8;font-size:13px;margin-bottom:14px;overflow-wrap:anywhere}
+.game-card a{display:block;padding:10px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:8px}
+.play-btn{background:#8738df;color:white}.download-btn{background:#229e68;color:white}
+.new-label{display:inline-block;background:#e64a78;padding:4px 9px;border-radius:20px;font-size:11px;margin-bottom:8px}
+.empty{text-align:center;padding:25px;color:#c5bad8;display:none}
+footer{margin-top:35px;padding:25px 15px;text-align:center;background:#1c1530;color:#c5bad8}
+.telegram{display:inline-block;margin:15px 0;padding:12px 22px;background:#229ED9;color:white;text-decoration:none;border-radius:8px;font-weight:bold}
+.tg-float{position:fixed;bottom:20px;right:20px;z-index:1000;text-decoration:none}
+.tg-icon{width:60px;height:60px;border-radius:50%;background:#0088cc;display:flex;justify-content:center;align-items:center;animation:pulse 1.5s ease-out infinite}
+.tg-icon svg{fill:white;width:30px;height:30px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,136,204,.5)}80%{box-shadow:0 0 0 14px rgba(0,136,204,0)}}
+</style>
+</head>
+<body>
+<header><h1>My Yono Games</h1><p>Explore Apps, Games, Latest Offers and Official Download Links</p></header>
+<main class="container">
+<input class="search" type="search" id="searchInput" placeholder="Search games..." aria-label="Search games">
+<div class="categories" id="categories">
+<button class="active" data-category="All Games">All Games</button>
+<button data-category="Casino Games">Casino Games</button>
+<button data-category="Dice Games">Dice Games</button>
+<button data-category="Card Games">Card Games</button>
+<button data-category="Mini Games">Mini Games</button>
+<button data-category="Other Games">Other Games</button>
+</div>
+<h2>🆕 New Games</h2><div class="games" id="newGamesList"></div>
+<h2>🎮 Explore Games</h2><div class="games" id="gamesList"></div>
+<div class="empty" id="emptyMessage">No games found!</div>
+</main>
+<footer><h3>My Yono Games</h3><p>Explore Games and Apps</p>
+<a class="telegram" href="https://t.me/rameeznaikontop" target="_blank" rel="noopener noreferrer">Join Telegram Channel</a>
+<p>© 2026 My Yono Games</p></footer>
+<a href="https://t.me/rameeznaikontop" target="_blank" rel="noopener noreferrer" class="tg-float" aria-label="Join Telegram">
+<div class="tg-icon"><svg viewBox="0 0 64 64"><path d="M56.4,8.2l-51.2,20c-1.7,0.6-1.6,3,0.1,3.5l9.7,2.9c2.1,0.6,3.8,2.2,4.4,4.3l3.8,12.1c0.5,1.6,2.5,2.1,3.7,0.9l5.2-5.3c0.9-0.9,2.2-1,3.2-0.3l11.5,8.4c1.6,1.2,3.9,0.3,4.3-1.7l8.7-41.8C60.4,9.1,58.4,7.4,56.4,8.2z"/></svg></div>
+</a>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const db=window.supabase.createClient(
+  "https://uovrstsnckifhgoimfwy.supabase.co",
+  "sb_publishable_cs3y91R1ScQNpTONzr7q2A_-SLmVdoq"
+);
+let allGames=[],selectedCategory="All Games";
+const $=id=>document.getElementById(id);
+function makeCard(g,isNew=false){
+  const card=document.createElement("article");card.className="game-card";
+  if(isNew){const tag=document.createElement("span");tag.className="new-label";tag.textContent="NEW GAME";card.append(tag)}
+  if(g.image_url){
+    const img=document.createElement("img");img.className="game-image";img.src=g.image_url;
+    img.alt=g.name;img.loading="lazy";card.append(img);
+  }else{
+    const icon=document.createElement("div");icon.className="game-icon";icon.textContent="🎮";card.append(icon);
+  }
+  const title=document.createElement("h3");title.textContent=g.name;card.append(title);
+  const desc=document.createElement("p");desc.textContent=g.description||"Game information";card.append(desc);
+  const play=document.createElement("a");play.className="play-btn";play.textContent="Play Now";
+  play.href=g.game_url||"#";play.target="_blank";play.rel="noopener noreferrer";card.append(play);
+  if(g.apk_url){
+    const apk=document.createElement("a");apk.className="download-btn";apk.textContent="Download APK";
+    apk.href=g.apk_url;apk.target="_blank";apk.rel="noopener noreferrer";card.append(apk);
+  }
+  return card;
+}
+function render(){
+  const q=$("searchInput").value.trim().toLowerCase();
+  const filtered=allGames.filter(g=>
+    (selectedCategory==="All Games"||g.category===selectedCategory)&&
+    (String(g.name||"").toLowerCase().includes(q)||String(g.description||"").toLowerCase().includes(q))
+  );
+  $("gamesList").replaceChildren(...filtered.map(g=>makeCard(g)));
+  $("emptyMessage").style.display=filtered.length?"none":"block";
+  const newest=allGames.filter(g=>
+    (selectedCategory==="All Games"||g.category===selectedCategory)&&
+    (String(g.name||"").toLowerCase().includes(q)||String(g.description||"").toLowerCase().includes(q))
+  ).slice(0,4);
+  $("newGamesList").replaceChildren(...newest.map(g=>makeCard(g,true)));
+}
+$("searchInput").addEventListener("input",render);
+$("categories").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-category]");if(!b)return;
+  selectedCategory=b.dataset.category;
+  $("categories").querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));
+  render();
+});
+async function loadGames(){
+  const {data,error}=await db.from("games")
+    .select("id,name,description,category,image_url,game_url,apk_url,created_at")
+    .eq("published",true).order("created_at",{ascending:false});
+  if(error){$("gamesList").textContent="Games could not be loaded. Please refresh.";console.error(error);return}
+  allGames=data||[];render();
+}
+loadGames();
+</script>
+</body>
+</html>

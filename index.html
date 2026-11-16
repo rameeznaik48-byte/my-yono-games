@@ -1,218 +1,114 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Yono Games</title>
-
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- background:#080808;
- color:white;
- font-family:Arial,sans-serif;
-}
-header{
- background:#111;
- padding:22px;
- text-align:center;
- border-bottom:2px solid #a020f0;
-}
-header h1{color:#c084fc;margin:0}
-header p{color:#bbb}
-.hero{
- text-align:center;
- padding:55px 15px;
- background:linear-gradient(135deg,#240044,#080808);
-}
-.hero h2{font-size:30px}
-.hero p{color:#ddd}
-.btn{
- display:inline-block;
- padding:13px 22px;
- margin:8px;
- background:#8b35ff;
- color:white;
- text-decoration:none;
- border-radius:8px;
- font-weight:bold;
-}
-section{
- max-width:1100px;
- margin:auto;
- padding:25px 15px;
-}
-h2{text-align:center;color:#d8a5ff}
-.categories{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px;
-}
-.category{
- background:#17121f;
- border:1px solid #8b35ff;
- border-radius:12px;
- padding:18px 8px;
- text-align:center;
- color:white;
- cursor:pointer;
- font-size:15px;
- font-weight:bold;
-}
-.category.active{
- background:#7020c9;
-}
-.games{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:15px;
-}
-.game{
- background:#17121f;
- border:1px solid #8b35ff;
- border-radius:15px;
- padding:22px;
- text-align:center;
-}
-.logo{
- width:105px;
- height:105px;
- margin:auto;
- background:#000;
- border:2px solid #a855f7;
- border-radius:18px;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:19px;
- font-weight:bold;
- color:#fff;
- text-align:center;
-}
-.logo span{color:#c084fc}
-.game h3{color:#d8a5ff}
-.game p{color:#bbb}
-.play{
- display:inline-block;
- padding:12px 28px;
- background:#8b35ff;
- color:white;
- text-decoration:none;
- border-radius:8px;
- font-weight:bold;
-}
-footer{
- background:#111;
- text-align:center;
- padding:25px;
- color:#aaa;
-}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#100d20;color:white}
+header{text-align:center;padding:30px 15px;background:linear-gradient(135deg,#26104d,#6416a8)}
+header h1{font-size:30px;margin-bottom:8px}
+.container{max-width:1000px;margin:auto;padding:20px 15px}
+.search{width:100%;padding:14px;border-radius:10px;border:1px solid #65439b;background:#211a35;color:white;font-size:16px;margin-bottom:18px}
+.categories{display:flex;gap:10px;overflow-x:auto;padding-bottom:15px}
+.categories button{flex-shrink:0;border:0;padding:11px 17px;border-radius:20px;background:#302447;color:white;cursor:pointer}
+.categories button.active,.categories button:hover{background:#8738df}
+h2{margin:15px 0}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:15px}
+.game-card{background:#211a35;border:1px solid #49366b;border-radius:14px;padding:18px 12px;text-align:center}
+.game-icon{font-size:38px;margin-bottom:12px}
+.game-card h3{margin-bottom:8px}
+.game-card p{color:#c5bad8;font-size:13px;margin-bottom:14px}
+.game-card a{display:block;background:#8738df;color:white;padding:10px;border-radius:8px;text-decoration:none;font-weight:bold}
+.empty{display:none;text-align:center;padding:25px;color:#c5bad8}
+footer{margin-top:35px;padding:25px 15px;text-align:center;background:#1c1530;color:#c5bad8}
+.telegram{display:inline-block;margin:15px 0;padding:12px 22px;background:#229ED9;color:white;text-decoration:none;border-radius:8px;font-weight:bold}
 </style>
 </head>
-
 <body>
-
 <header>
-<h1>MY YONO GAMES</h1>
-<p>Explore Apps, Games and Latest Offers</p>
+<h1>My Yono Games</h1>
+<p>Explore Apps, Games, Latest Offers and Official Download Links</p>
 </header>
-<footer>
-  <a href="https://t.me/rameeznaikontop"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="display:inline-block;padding:12px 22px;background:#229ED9;color:white;text-decoration:none;border-radius:8px;font-weight:bold;">
-    Join Telegram Channel
-  </a>
-<div class="hero">
-<h2>Welcome to My Yono Games</h2>
-<p>Explore Your Favourite Games in One Place!</p>
-<a class="btn" href="#games">Explore Now</a>
-<a class="btn" href="#games">Play Now</a>
-</div>
 
-<section>
-<h2>Explore Categories</h2>
+<main class="container">
+<input class="search" type="search" id="searchInput" placeholder="Search games..." oninput="filterGames()">
 
 <div class="categories">
-<button class="category active" onclick="showGame('All')">🎮 All Games</button>
-<button class="category" onclick="showGame('Casino Games')">🎰 Casino Games</button>
-<button class="category" onclick="showGame('Dice Games')">🎲 Dice Games</button>
-<button class="category" onclick="showGame('Card Games')">🃏 Card Games</button>
-<button class="category" onclick="showGame('Mini Games')">🎮 Mini Games</button>
-</div>
-</section>
-
-<section id="games">
-<h2 id="gameHeading">All Games</h2>
-
-<div class="games" id="gameList">
-
-<div class="game" data-categories="Casino Games,Dice Games,Card Games,Mini Games">
-
-<div class="logo">
-<div>DHAN<br><span>GAME</span></div>
+<button class="active" onclick="setCategory('All Games',this)">All Games</button>
+<button onclick="setCategory('Casino Games',this)">Casino Games</button>
+<button onclick="setCategory('Dice Games',this)">Dice Games</button>
+<button onclick="setCategory('Card Games',this)">Card Games</button>
+<button onclick="setCategory('Mini Games',this)">Mini Games</button>
+<button onclick="setCategory('Other Games',this)">Other Games</button>
 </div>
 
+<h2>Explore Games</h2>
+<div class="games" id="gamesList">
+
+<div class="game-card" data-category="Card Games">
+<div class="game-icon">🃏</div>
+<h3>123 Rummy</h3>
+<p>Card game information</p>
+<a href="https://www.123rummy46.com/?code=HT9KA5FGGJB&amp;t=1794799060" target="_blank" rel="noopener noreferrer">Open Link</a>
+</div>
+
+<div class="game-card" data-category="Casino Games">
+<div class="game-icon">🎰</div>
 <h3>Dhan Game</h3>
-<p>Casino • Dice • Card • Mini Games</p>
+<p>Game information</p>
+<a href="https://www.dhangmaegame.com/?code=47T85N5B1AU&amp;t=1794799704" target="_blank" rel="noopener noreferrer">Open Link</a>
+</div>
 
-<a class="play"
-href="https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794756436"
-target="_blank"
-rel="noopener noreferrer">
-Play Now
-</a>
-
+<div class="game-card" data-category="Other Games">
+<div class="game-icon">🎮</div>
+<h3>Spin777</h3>
+<p>Game listing</p>
+<span>Link not available</span>
 </div>
 
 </div>
-</section>
+<div class="empty" id="emptyMessage">No games found.</div>
+</main>
 
 <footer>
-© 2026 My Yono Games
+<p>My Yono Games</p>
+<a class="telegram" href="https://t.me/rameeznaikontop" target="_blank" rel="noopener noreferrer">Join Telegram Channel</a>
+<p>18+ only where legally permitted. Check local laws. Play responsibly.</p>
 </footer>
 
 <script>
-function showGame(category){
+let selectedCategory="All Games";
 
- const game=document.querySelector('.game');
- const buttons=document.querySelectorAll('.category');
- const heading=document.getElementById('gameHeading');
+function setCategory(category,button){
+selectedCategory=category;
+document.querySelectorAll(".categories button").forEach(btn=>btn.classList.remove("active"));
+button.classList.add("active");
+filterGames();
+}
 
- buttons.forEach(button=>{
-   button.classList.toggle(
-     'active',
-     button.textContent.includes(category)
-   );
- });
+function filterGames(){
+const search=document.getElementById("searchInput").value.toLowerCase();
+const cards=document.querySelectorAll(".game-card");
+let visible=0;
 
- if(category==='All'){
-   game.style.display='block';
-   heading.textContent='All Games';
- }else{
-   const categories=game.dataset.categories.split(',');
-   game.style.display=categories.includes(category)?'block':'none';
-   heading.textContent=category;
- }
+cards.forEach(card=>{
+const name=card.querySelector("h3").textContent.toLowerCase();
+const category=card.dataset.category;
+const categoryMatch=selectedCategory==="All Games"||category===selectedCategory;
+const searchMatch=name.includes(search);
 
- document.getElementById('games').scrollIntoView({
-   behavior:'smooth'
- });
+if(categoryMatch&&searchMatch){
+card.style.display="block";
+visible++;
+}else{
+card.style.display="none";
+}
+});
+
+document.getElementById("emptyMessage").style.display=visible===0?"block":"none";
 }
 </script>
-
 </body>
 </html>
-
-  <p>© 2026 My Yono Games</p>
-</footer>
-<div class="game-card">
-  <h3>123 Rummy</h3>
-  <a href="https://www.123rummy46.com/?code=HT9KA5FGGJB&t=1794799060"
-     target="_blank"
-     rel="noopener noreferrer">
-    Visit 123 Rummy
-  </a>
-</div>

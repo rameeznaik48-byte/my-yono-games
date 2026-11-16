@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Yono Games — Admin</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#100d20;color:#fff;font:15px Arial,sans-serif}
+header{padding:24px 16px;text-align:center;background:linear-gradient(135deg,#26104d,#6416a8)}
+main{max-width:850px;margin:24px auto;padding:0 15px}.panel{background:#211a35;border:1px solid #49366b;border-radius:15px;padding:18px;margin-bottom:18px}
+h1{margin:0 0 8px}h2{margin:0 0 16px}.muted{color:#c5bad8}
+input,select,textarea{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #65439b;border-radius:9px;background:#171126;color:#fff;font:inherit}
+textarea{min-height:75px;resize:vertical}label{display:block;color:#ddd2ef;font-weight:bold}
+button{border:0;border-radius:9px;padding:12px 16px;background:#8738df;color:#fff;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.6;cursor:not-allowed}button.secondary{background:#49366b}button.danger{background:#b93252}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
+.game{display:flex;align-items:center;gap:12px;border-top:1px solid #49366b;padding:12px 0}
+.game img{width:58px;height:58px;object-fit:cover;border-radius:9px;background:#302447}
+.game-info{flex:1;min-width:0}.game-info small{display:block;color:#c5bad8;margin-top:5px;overflow-wrap:anywhere}
+#status{padding:10px 0;color:#cbb5ff;white-space:pre-wrap}.hidden{display:none!important}
+#loginStatus{white-space:pre-wrap;margin-top:12px}.hint{font-size:12px;color:#bcaed1;margin:-7px 0 14px}
+</style>
+</head>
+<body>
+<header><h1>My Yono Games</h1><p>Admin Panel</p></header>
+<main>
+<section id="loginPanel" class="panel">
+<h2>Admin Login</h2><p class="muted">Sign in using a secure email link. No password needed.</p>
+<label for="email">Admin Gmail</label><input id="email" type="email" value="rameeznaik48@gmail.com" readonly>
+<button id="sendLink" type="button">Send Login Link</button><div id="loginStatus" class="muted"></div>
+</section>
+<section id="dashboard" class="hidden">
+<div class="panel"><div class="row" style="align-items:center"><div><h2>Manage Games</h2><p id="signedIn" class="muted"></p></div><button id="logout" class="secondary" type="button">Log Out</button></div></div>
+<div class="panel">
+<h2 id="formTitle">Add New Game</h2>
+<form id="gameForm">
+<label for="name">Game / App Name</label><input id="name" required maxlength="90" placeholder="Enter game name">
+<label for="category">Category</label><select id="category"><option>Casino Games</option><option>Dice Games</option><option>Card Games</option><option>Mini Games</option><option>Other Games</option></select>
+<label for="description">Description</label><textarea id="description" placeholder="Short description"></textarea>
+<label for="gameUrl">Game Website Link</label><input id="gameUrl" type="url" placeholder="https://..." required>
+<label for="apkUrl">APK Download Link (optional)</label><input id="apkUrl" type="url" placeholder="https://...">
+<label for="image">Game Image (optional)</label><input id="image" type="file" accept="image/*">
+<p class="hint">Upload a JPG, PNG, WEBP or other supported image. Leave blank while editing to keep the current image.</p>
+<label><input id="published" type="checkbox" checked style="width:auto;margin-right:8px"> Publish on website</label>
+<div class="row"><button id="save" type="submit">Add Game</button><button id="cancel" type="button" class="secondary hidden">Cancel Edit</button></div>
+<div id="status" role="status" aria-live="polite"></div>
+</form></div>
+<div class="panel"><h2>All Games</h2><div id="gameList" class="muted">Loading...</div></div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://uovrstsnckifhgoimfwy.supabase.co";
+const SUPABASE_KEY="sb_publishable_cs3y91R1ScQNpTONzr7q2A_-SLmVdoq";
+const ADMIN_EMAIL="rameeznaik48@gmail.com";
+const IMAGE_BUCKET="game-images";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);
+let editingId=null;
+const safeUrl=value=>{
+  if(!value)return null;
+  try{const u=new URL(value);return ["https:","http:"].includes(u.protocol)?u.href:null}
+  catch{return null}
+};
+function say(message){$("status").textContent=message}
+function showDashboard(session){
+  if(!session || session.user.email!==ADMIN_EMAIL)return;
+  $("loginPanel").classList.add("hidden");
+  $("dashboard").classList.remove("hidden");
+  $("signedIn").textContent="Signed in as "+session.user.email;
+  refresh();
+}
+async function refresh(){
+  $("gameList").textContent="Loading games...";
+  const {data,error}=await db.from("games").select("*").order("created_at",{ascending:false});
+  if(error){$("gameList").textContent="Could not load games: "+error.message;return}
+  $("gameList").replaceChildren();
+  if(!data || !data.length){$("gameList").textContent="No games yet.";return}
+  data.forEach(g=>{
+    const wrap=document.createElement("div");wrap.className="game";
+    if(g.image_url){
+      const img=document.createElement("img");img.src=g.image_url;img.alt=g.name;wrap.append(img);
+    }
+    const info=document.createElement("div");info.className="game-info";
+    const title=document.createElement("strong");title.textContent=g.name;
+    const small=document.createElement("small");small.textContent=(g.category||"Other Games")+" · "+(g.published?"Published":"Hidden");
+    info.append(title,small);wrap.append(info);
+    const edit=document.createElement("button");edit.className="secondary";edit.type="button";edit.textContent="Edit";edit.onclick=()=>loadGame(g);
+    const del=document.createElement("button");del.className="danger";del.type="button";del.textContent="Delete";del.onclick=()=>removeGame(g);
+    wrap.append(edit,del);$("gameList").append(wrap);
+  });
+}
+function loadGame(g){
+  editingId=g.id;$("name").value=g.name||"";$("category").value=g.category||"Other Games";
+  $("description").value=g.description||"";$("gameUrl").value=g.game_url||"";
+  $("apkUrl").value=g.apk_url||"";$("published").checked=!!g.published;
+  $("image").value="";$("formTitle").textContent="Edit Game";$("save").textContent="Save Changes";
+  $("cancel").classList.remove("hidden");say("Editing "+g.name);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function resetForm(){
+  editingId=null;$("gameForm").reset();$("published").checked=true;$("image").value="";
+  $("formTitle").textContent="Add New Game";$("save").textContent="Add Game";
+  $("cancel").classList.add("hidden");say("");
+}
+$("cancel").onclick=resetForm;
+$("sendLink").onclick=async()=>{
+  $("sendLink").disabled=true;$("loginStatus").textContent="Sending secure login link...";
+  const {error}=await db.auth.signInWithOtp({
+    email:ADMIN_EMAIL,
+    options:{emailRedirectTo:location.href,shouldCreateUser:false}
+  });
+  $("loginStatus").textContent=error?error.message:"Login link sent. Open your Gmail and tap the link to sign in.";
+  $("sendLink").disabled=false;
+};
+$("logout").onclick=async()=>{await db.auth.signOut();location.reload()};
+$("gameForm").onsubmit=async e=>{
+  e.preventDefault();$("save").disabled=true;say("Saving game...");
+  try{
+    const game={
+      name:$("name").value.trim(),category:$("category").value,
+      description:$("description").value.trim(),game_url:safeUrl($("gameUrl").value),
+      apk_url:safeUrl($("apkUrl").value),published:$("published").checked
+    };
+    if(!game.game_url){say("Please enter a valid http/https game link.");return}
+    const file=$("image").files[0];
+    if(file){
+      if(!file.type.startsWith("image/")){say("Please select a valid image file.");return}
+      const ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"");
+      const path=Date.now()+"-"+Math.random().toString(36).slice(2)+"."+ext;
+      const {error:uploadError}=await db.storage.from(IMAGE_BUCKET).upload(path,file,{upsert:false,contentType:file.type});
+      if(uploadError){say("Image upload failed: "+uploadError.message);return}
+      game.image_url=db.storage.from(IMAGE_BUCKET).getPublicUrl(path).data.publicUrl;
+    }
+    const result=editingId
+      ?await db.from("games").update(game).eq("id",editingId)
+      :await db.from("games").insert(game);
+    if(result.error){say("Save failed: "+result.error.message);return}
+    say("Game saved successfully.");resetForm();await refresh();
+  }catch(err){say("Something went wrong: "+(err.message||err))}
+  finally{$("save").disabled=false}
+};
+async function removeGame(g){
+  if(!confirm("Delete "+g.name+"?"))return;
+  const {error}=await db.from("games").delete().eq("id",g.id);
+  if(error){say("Delete failed: "+error.message);return}
+  say("Game deleted.");await refresh();
+}
+async function start(){
+  const {data,error}=await db.auth.getSession();
+  if(error){$("loginStatus").textContent=error.message;return}
+  if(data.session){
+    if(data.session.user.email!==ADMIN_EMAIL){
+      await db.auth.signOut();$("loginStatus").textContent="This email is not allowed.";return;
+    }
+    showDashboard(data.session);
+  }
+}
+db.auth.onAuthStateChange((_event,session)=>{
+  if(session && session.user.email===ADMIN_EMAIL)showDashboard(session);
+  else if(!session){$("loginPanel").classList.remove("hidden");$("dashboard").classList.add("hidden")}
+});
+start();
+</script>
+</body>
+</html>

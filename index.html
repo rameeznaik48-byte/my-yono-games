@@ -3,310 +3,268 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Yono Games - All Games List</title>
-<meta name="description" content="Explore Yono games, apps and download links on My Yono Games.">
+<meta name="theme-color" content="#087443">
+<title>My Yono Games</title>
+<meta name="description" content="Explore games and apps on My Yono Games.">
+
 <style>
+:root{
+ --green:#159b55;
+ --dark:#087443;
+ --light:#e8f5e9;
+ --border:#c8e6c9;
+ --text:#173b29;
+ --white:#fff;
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{
- font-family:Arial,sans-serif;
- background:#f3f6fb;
- color:#202b3c;
- line-height:1.6
-}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:Arial,sans-serif;background:#e8f5e9;color:var(--text);line-height:1.6}
 a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer}
+
+/* HEADER */
 header{
- background:white;padding:15px 5%;
- display:flex;align-items:center;justify-content:space-between;
- box-shadow:0 2px 10px #0000000d;
- position:sticky;top:0;z-index:10
+ position:sticky;top:0;z-index:1000;
+ background:#c8e6c9;
+ border-bottom:1px solid #a5d6a7;
 }
-.brand{display:flex;align-items:center;gap:12px;font-size:23px;font-weight:bold}
-.logo {
-  width: 100px;
-  height: 78px;
-  flex-shrink: 0;
-  border-radius: 18px;
-  border: 3px solid #168b43;
-  background: linear-gradient(145deg, #003b20, #08733d, #002d19);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  line-height: 1;
-  box-shadow: 0 0 10px #16a34a;
+.navbar{
+ max-width:1200px;margin:auto;padding:10px 20px;
+ display:flex;align-items:center;justify-content:space-between;gap:15px;
 }
-
-.logo-my {
-  color: white;
-  font-size: 16px;
-  font-weight: 900;
+.brand{display:flex;align-items:center;gap:12px;font-weight:bold;font-size:20px}
+.logo{
+ width:82px;height:68px;flex-shrink:0;border-radius:16px;
+ border:3px solid #168b43;
+ background:linear-gradient(145deg,#003b20,#08733d,#002d19);
+ display:flex;flex-direction:column;justify-content:center;align-items:center;
+ line-height:1;box-shadow:0 0 10px #16a34a;
 }
-
-.logo-yono {
-  font-size: 27px;
-  font-weight: 900;
-  background: linear-gradient(#fff36b, #ffd700, #e58b00);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-stroke: 0.5px #a66b00;
-  text-shadow: 2px 3px 2px #542d00;
+.logo-my{color:white;font-size:13px;font-weight:900}
+.logo-yono{
+ font-size:23px;font-weight:900;
+ background:linear-gradient(#fff36b,#ffd700,#e58b00);
+ -webkit-background-clip:text;background-clip:text;color:transparent;
+ -webkit-text-stroke:.5px #a66b00;
+}
+.logo-games{color:#07552c;background:white;border-radius:4px;font-size:13px;font-weight:900;padding:2px 7px}
+.desktop-menu{display:flex;align-items:center;gap:19px}
+.desktop-menu a{font-size:14px;font-weight:bold;white-space:nowrap}
+.desktop-menu a:hover{color:var(--green)}
+.menu-btn{
+ display:none;border:0;background:var(--green);color:white;
+ padding:9px 13px;border-radius:8px;font-size:23px;
 }
 
-.logo-games {
-  color: #07552c;
-  background: white;
-  border-radius: 5px;
-  font-size: 15px;
-  font-weight: 900;
-  padding: 3px 8px;
+/* MOBILE MENU */
+.overlay{
+ position:fixed;inset:0;background:#0008;z-index:1100;
+ opacity:0;visibility:hidden;transition:.3s;
 }
+.overlay.active{opacity:1;visibility:visible}
+.mobile-menu{
+ position:fixed;top:0;right:-320px;width:290px;max-width:85%;
+ height:100%;background:white;z-index:1200;padding:22px;
+ transition:.3s;overflow-y:auto;
+}
+.mobile-menu.active{right:0}
+.mobile-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.mobile-top h2{color:var(--dark);font-size:21px}
+.close-btn{border:0;background:var(--light);color:var(--dark);padding:7px 12px;border-radius:7px;font-size:22px}
+.mobile-menu a{
+ display:block;padding:13px;margin-bottom:8px;
+ background:#f0f8f1;border-radius:9px;font-weight:bold;
+}
+.mobile-menu a:hover{background:#dceddf;color:var(--dark)}
 
-@media(max-width:600px) {
-  .logo { width:82px; height:68px; }
-  .logo-yono { font-size:22px; }
-}
-}
-.menu{font-size:27px;color:#1760dc;cursor:pointer}
-nav{
- display:flex;justify-content:center;flex-wrap:wrap;
- background:white;border-top:1px solid #eee;
- border-bottom:1px solid #eee
-}
-nav a{padding:12px 19px;color:#536174;font-size:14px}
-nav a:hover{color:#1760dc}
+/* HERO */
 .hero{
- background:linear-gradient(120deg,#f8fbff,#e9f1ff);
- text-align:center;padding:38px 18px 30px
+ background:linear-gradient(135deg,#087443,#159b55);
+ color:white;text-align:center;padding:58px 18px;
 }
 .hero h1{font-size:36px;line-height:1.3;margin-bottom:12px}
-.hero h1 span{color:#2863db}
-.hero p{font-size:17px;color:#596779;max-width:650px;margin:0 auto 22px}
-.features{
- display:flex;justify-content:center;gap:30px;
- flex-wrap:wrap;margin:20px 0
+.hero h1 span{color:#ffdf65}
+.hero p{max-width:650px;margin:auto;font-size:15px;line-height:1.8}
+.hero-btn{
+ display:inline-block;margin-top:22px;background:white;color:var(--dark);
+ padding:12px 24px;border-radius:9px;font-weight:bold;
 }
-.feature{font-size:14px;color:#526175}
-.feature strong{display:block;font-size:17px;color:#202b3c}
-.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.btn{
- display:inline-block;padding:13px 25px;border-radius:13px;
- background:#2863df;color:white;font-size:16px;border:1px solid #2863df;
- cursor:pointer
+
+/* SECTIONS */
+.container{max-width:1100px;margin:auto;padding:40px 20px}
+.section-title{font-size:26px;color:var(--dark);margin-bottom:10px}
+.section-desc{color:#526b5a;margin-bottom:22px}
+
+/* SEARCH */
+.search-box{margin-bottom:18px}
+.search-box input{
+ width:100%;padding:14px;border:1px solid var(--border);
+ border-radius:10px;background:#f8fff9;font-size:15px;outline:none;
 }
-.btn.outline{background:transparent;color:#2863df}
-.container{max-width:1050px;margin:auto;padding:28px 18px}
-.section-title{font-size:28px;margin-bottom:10px}
-.description{color:#596779;margin-bottom:24px}
-.search{
- width:100%;padding:15px 17px;border:1px solid #dce2ec;
- border-radius:13px;font-size:16px;outline:none;margin-bottom:18px
+.search-box input:focus{border-color:var(--green)}
+.filter-buttons{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px}
+.filter-btn{
+ padding:9px 17px;border:1px solid var(--border);
+ border-radius:22px;background:#dceddf;color:var(--dark);font-weight:bold;
 }
-.search:focus{border-color:#2863df}
-.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:23px}
-.filter{
- border:1px solid #d8e0ed;background:white;color:#526175;
- padding:9px 17px;border-radius:30px;cursor:pointer
-}
-.filter.active{background:#2863df;color:white;border-color:#2863df}
-.game-list{display:grid;gap:14px}
-.game{
- background:white;border:1px solid #e9edf3;border-radius:20px;
- padding:17px;display:flex;align-items:center;gap:17px;
- box-shadow:0 3px 12px #00000005
+.filter-btn.active,.filter-btn:hover{background:var(--green);color:white}
+
+/* GAMES */
+.games-grid{display:grid;grid-template-columns:1fr;gap:15px}
+.game-card{
+ display:flex;align-items:center;gap:16px;
+ padding:17px;background:#dceddf;border:1px solid #a5d6a7;
+ border-radius:17px;box-shadow:0 3px 12px #00000008;
 }
 .game-logo{
- width:90px;height:90px;flex-shrink:0;border-radius:17px;
+ width:78px;height:78px;flex-shrink:0;border-radius:15px;
  background:linear-gradient(140deg,#075b43,#1eac78);
- display:grid;place-items:center;color:white;font-size:22px;
- font-weight:bold;text-align:center;padding:5px
+ color:white;display:grid;place-items:center;
+ font-size:20px;font-weight:bold;text-align:center;padding:5px;
 }
 .game-info{flex:1;min-width:0}
-.game-info h3{font-size:20px;margin-bottom:5px}
-.game-info p{font-size:14px;color:#64748b}
-.bonus{color:#16836c!important}
+.game-info h3{font-size:19px;margin-bottom:4px}
+.game-info p{font-size:13px;color:#526b5a}
+.game-info .bonus{color:#087443;font-weight:bold}
 .download{
- background:#2863df;color:white;border-radius:12px;
- padding:12px 19px;white-space:nowrap;font-size:15px;
- display:inline-block;text-align:center
+ display:inline-block;background:var(--green);color:white;
+ padding:11px 18px;border-radius:10px;font-size:14px;
+ font-weight:bold;white-space:nowrap;
 }
-.download.disabled{background:#aab4c3;pointer-events:none}
-.empty{text-align:center;padding:30px;color:#64748b;display:none}
+.download:hover{background:#087443}
+.download.disabled{background:#9cae9f;pointer-events:none}
+.empty{display:none;text-align:center;padding:30px;color:#526b5a}
+
+/* TELEGRAM */
 .telegram{
- background:#e9f2ff;text-align:center;padding:30px 15px;
- border-radius:18px;margin-top:30px
+ background:#c8e6c9;border:1px solid #a5d6a7;
+ text-align:center;padding:30px 15px;border-radius:17px;margin-top:30px;
 }
-.telegram h2{margin-bottom:8px}
+.telegram h2{color:var(--dark);margin-bottom:8px}
+.telegram p{margin-bottom:15px}
+.green-btn{
+ display:inline-block;background:var(--green);color:white;
+ padding:12px 23px;border-radius:9px;font-weight:bold;
+}
+.green-btn:hover{background:#087443}
+
+/* ABOUT */
+.info-section{padding-top:15px;padding-bottom:20px}
+
+/* FOOTER */
 footer{
- background:#17243a;color:white;text-align:center;
- padding:28px 15px;margin-top:20px
+ background:#14532d;color:white;text-align:center;padding:28px 15px;
 }
-footer p{color:#cbd5e1;font-size:14px;margin-top:5px}
+footer p{color:#d1e7d5;font-size:13px;margin-top:5px}
+
+@media(max-width:800px){
+ .desktop-menu{display:none}
+ .menu-btn{display:block}
+}
 @media(max-width:600px){
- header{padding:12px 15px}
- .brand{font-size:19px}
+ .navbar{padding:9px 13px}
+ .brand{font-size:17px;gap:9px}
+ .logo{width:72px;height:62px}
+ .logo-yono{font-size:20px}
+ .hero{padding:43px 15px}
  .hero h1{font-size:29px}
- .hero p{font-size:15px}
- .features{gap:15px}
- .feature{font-size:12px}
- .container{padding:23px 13px}
- .section-title{font-size:24px}
- .game{gap:11px;padding:12px}
- .game-logo{width:67px;height:67px;font-size:17px}
- .game-info h3{font-size:17px}
- .game-info p{font-size:12px}
- .download{padding:10px 12px;font-size:13px}
- nav a{padding:10px 12px;font-size:13px}
- 
-/* GREEN BUTTON THEME */
-
-.btn,
-.download,
-.filter,
-.filter.active {
-  background: #16A34A !important;
-  color: #ffffff !important;
-  border-color: #16A34A !important;
+ .container{padding:27px 13px}
+ .section-title{font-size:23px}
+ .game-card{gap:10px;padding:11px}
+ .game-logo{width:62px;height:62px;font-size:16px}
+ .game-info h3{font-size:16px}
+ .game-info p{font-size:11px}
+ .download{padding:9px 10px;font-size:12px}
+ .filter-btn{padding:8px 12px;font-size:12px}
 }
-
-.btn:hover,
-.download:hover,
-.filter:hover {
-  background: #15803D !important;
-  border-color: #15803D !important;
-  color: #ffffff !important;
-}
-
-.btn.outline {
-  background: #16A34A !important;
-  color: #ffffff !important;
-}
- 
-/* GREEN WEBSITE BACKGROUND THEME */
-
-body {
-  background: #e8f5e9 !important;
-}
-
-header,
-nav {
-  background: #c8e6c9 !important;
-}
-
-.game {
-  background: #dceddf !important;
-  border-color: #a5d6a7 !important;
-}
-
-.search {
-  background: #f1f8f2 !important;
-  border-color: #a5d6a7 !important;
-}
-
-.hero {
-  background: linear-gradient(120deg, #c8e6c9, #a5d6a7) !important;
-}
-
-.telegram {
-  background: #c8e6c9 !important;
-}
-
-footer {
-  background: #14532d !important;
-}
-
-.filter {
-  background: #dceddf;
-  color: #14532d;
-}
- 
+@media(max-width:350px){
+ .game-card{flex-wrap:wrap}
+ .download{margin-left:auto}
 }
 </style>
 </head>
+
 <body>
+
 <header>
- 
-<div class="brand">
-  <div class="logo">
+ <div class="navbar">
+  <a href="#" class="brand">
+   <div class="logo">
     <span class="logo-my">MY</span>
     <span class="logo-yono">YONO</span>
     <span class="logo-games">GAMES</span>
-  </div>
-  <span>My Yono Games</span>
-</div>
- 
+   </div>
+   <span>My Yono Games</span>
+  </a>
 
-<nav id="navigation">
+  <nav class="desktop-menu">
+   <a href="#">⌂ Home</a>
+   <a href="#games">🎮 Games</a>
+   <a href="#about">ⓘ About</a>
+   <a href="#contact">✉ Contact</a>
+   <a href="#disclaimer">▤ Disclaimer</a>
+   <a href="https://t.me/rameeznaikontop" target="_blank" rel="noopener">➤ Telegram</a>
+  </nav>
+
+  <button class="menu-btn" id="menuOpen" aria-label="Open menu" aria-expanded="false">☰</button>
+ </div>
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+ <div class="mobile-top">
+  <h2>My Yono Games</h2>
+  <button class="close-btn" id="menuClose" aria-label="Close menu">×</button>
+ </div>
  <a href="#">⌂ Home</a>
+ <a href="#games">🎮 Games</a>
  <a href="#about">ⓘ About</a>
  <a href="#contact">✉ Contact</a>
  <a href="#disclaimer">▤ Disclaimer</a>
- <a href="https://t.me/rameeznaikontop" target="_blank">➤ Telegram</a>
-</nav>
+ <a href="https://t.me/rameeznaikontop" target="_blank" rel="noopener">➤ Telegram</a>
+</aside>
 
 <section class="hero">
  <h1>All <span>Yono Games</span> List</h1>
- <p>Explore games and apps in one place. Find game information and available download links.</p>
-
- <div class="features">
-  <div class="feature">🎮 <strong>Games</strong>Explore apps</div>
-  <div class="feature">🔎 <strong>Game Details</strong>Useful information</div>
-  <div class="feature">🔗 <strong>Game Links</strong>Quick access</div>
- </div>
-
- <div class="actions">
-  <a class="btn" href="https://t.me/rameeznaikontop" target="_blank">Join Telegram</a>
-  <a class="btn outline" href="#games">Browse All Games</a>
- </div>
+ <p>Explore games and apps in one place. Find game information and available links easily.</p>
+ <a href="#games" class="hero-btn">Browse All Games ↓</a>
 </section>
 
 <main class="container" id="games">
  <h2 class="section-title">Yono All Games List</h2>
- <p class="description">
-  Explore available games below. Check each game's official terms,
-  eligibility and conditions before downloading or registering.
- </p>
+ <p class="section-desc">Explore available games below. Check each game's official terms and conditions before downloading or registering.</p>
 
- <input class="search" id="search" type="search"
- placeholder="🔍 Search games..." oninput="filterGames()">
-
- <div class="filters">
-  <button class="filter active" onclick="setCategory('All',this)">All Games</button>
-  <button class="filter" onclick="setCategory('Rummy',this)">Rummy Games</button>
-  <button class="filter" onclick="setCategory('Casino',this)">Casino Games</button>
-  <button class="filter" onclick="setCategory('Other',this)">Other Games</button>
+ <div class="search-box">
+  <input type="search" id="searchInput" placeholder="🔍 Search games..." aria-label="Search games">
  </div>
 
- <div class="game-list" id="gameList"></div>
- <div class="empty" id="empty">No games found.</div>
+ <div class="filter-buttons">
+  <button class="filter-btn active" data-category="All">All Games</button>
+  <button class="filter-btn" data-category="Rummy">Rummy Games</button>
+  <button class="filter-btn" data-category="Casino">Casino Games</button>
+  <button class="filter-btn" data-category="Other">Other Games</button>
+ </div>
+
+ <div class="games-grid" id="gamesGrid"></div>
+ <div class="empty" id="emptyMessage">No games found.</div>
 
  <section class="telegram" id="contact">
   <h2>Join Our Telegram Channel</h2>
   <p>Get updates about games, apps and new links.</p>
-  <br>
-  <a class="btn" href="https://t.me/rameeznaikontop" target="_blank">
-   Join Telegram Channel
-  </a>
+  <a class="green-btn" href="https://t.me/rameeznaikontop" target="_blank" rel="noopener">➤ Join Telegram Channel</a>
  </section>
 </main>
 
-<section class="container" id="about">
+<section class="container info-section" id="about">
  <h2 class="section-title">About My Yono Games</h2>
- <p class="description">
-  My Yono Games is a gaming and app information website.
-  Browse listed games and access their provided links.
- </p>
+ <p class="section-desc">My Yono Games is an independent gaming and app information website. Browse listed games and access their provided links.</p>
 </section>
 
-<section class="container" id="disclaimer">
+<section class="container info-section" id="disclaimer">
  <h2 class="section-title">Disclaimer</h2>
- <p class="description">
-  My Yono Games is an independent information website and is not
-  affiliated with the listed game operators unless expressly stated.
-  Game availability, bonuses, withdrawals and terms can change.
-  Always check the operator's official website and applicable local laws.
-  Real-money gaming involves financial risk. Only eligible adults should
-  participate where legally permitted.
+ <p class="section-desc">
+ My Yono Games is an independent information website and is not affiliated with listed game operators unless expressly stated. Game availability, offers and terms may change. Always check official websites and applicable local laws. Real-money gaming involves financial risk. Only eligible adults should participate where legally permitted.
  </p>
 </section>
 
@@ -319,91 +277,133 @@ footer {
 <script>
 const games = [
  {
-  name:"123 Rummy",
-  logo:"123",
-  category:"Rummy",
-  bonus:"Check official offer",
-  withdrawal:"Check game terms",
-  link:"#"
- },
- {
   name:"Dhan Game",
   logo:"DHAN",
   category:"Casino",
   bonus:"Check official offer",
-  withdrawal:"Check game terms",
+  details:"Check official game terms",
   link:"https://www.dhangmaegame.com/?code=47T85N5B1AU&t=1794756436"
+ },
+ {
+  name:"123 Rummy",
+  logo:"123",
+  category:"Rummy",
+  bonus:"Coming Soon",
+  details:"Link will be updated soon",
+  link:""
  }
 ];
 
-let selectedCategory = "All";
+let selectedCategory="All";
+
+const grid=document.getElementById("gamesGrid");
+const searchInput=document.getElementById("searchInput");
+const emptyMessage=document.getElementById("emptyMessage");
 
 function renderGames(){
- const list = document.getElementById("gameList");
- list.innerHTML = "";
+ const search=searchInput.value.trim().toLowerCase();
 
- const search = document.getElementById("search").value.toLowerCase();
+ const filtered=games.filter(game=>{
+  const categoryMatch=selectedCategory==="All"||game.category===selectedCategory;
+  const searchMatch=game.name.toLowerCase().includes(search);
+  return categoryMatch&&searchMatch;
+ });
 
- const filtered = games.filter(game =>
-  (selectedCategory === "All" || game.category === selectedCategory) &&
-  game.name.toLowerCase().includes(search)
- );
+ grid.innerHTML="";
 
- filtered.forEach(game => {
-  const card = document.createElement("div");
-  card.className = "game";
+ filtered.forEach(game=>{
+  const card=document.createElement("article");
+  card.className="game-card";
 
-  const logo = document.createElement("div");
-  logo.className = "game-logo";
-  logo.textContent = game.logo;
+  const logo=document.createElement("div");
+  logo.className="game-logo";
+  logo.textContent=game.logo;
 
-  const info = document.createElement("div");
-  info.className = "game-info";
+  const info=document.createElement("div");
+  info.className="game-info";
 
-  const heading = document.createElement("h3");
-  heading.textContent = game.name;
+  const heading=document.createElement("h3");
+  heading.textContent=game.name;
 
-  const bonus = document.createElement("p");
-  bonus.className = "bonus";
-  bonus.textContent = "🎁 " + game.bonus;
+  const bonus=document.createElement("p");
+  bonus.className="bonus";
+  bonus.textContent="🎁 "+game.bonus;
 
-  const withdrawal = document.createElement("p");
-  withdrawal.textContent = "▣ " + game.withdrawal;
+  const details=document.createElement("p");
+  details.textContent="ℹ "+game.details;
 
-  info.append(heading,bonus,withdrawal);
+  info.append(heading,bonus,details);
 
-  const link = document.createElement("a");
-  link.className = "download" + (game.link === "#" ? " disabled" : "");
-  link.textContent = game.link === "#" ? "Link Soon" : "Download";
+  const link=document.createElement("a");
+  link.className="download";
 
-  if(game.link !== "#"){
-   link.href = game.link;
-   link.target = "_blank";
-   link.rel = "noopener noreferrer";
+  if(game.link){
+   link.href=game.link;
+   link.target="_blank";
+   link.rel="noopener noreferrer";
+   link.textContent="Open Game";
+  }else{
+   link.href="#";
+   link.classList.add("disabled");
+   link.textContent="Coming Soon";
+   link.setAttribute("aria-disabled","true");
+   link.addEventListener("click",event=>event.preventDefault());
   }
 
   card.append(logo,info,link);
-  list.appendChild(card);
+  grid.appendChild(card);
  });
 
- document.getElementById("empty").style.display =
-  filtered.length ? "none" : "block";
+ emptyMessage.style.display=filtered.length?"none":"block";
 }
 
-function filterGames(){
- renderGames();
+document.querySelectorAll(".filter-btn").forEach(button=>{
+ button.addEventListener("click",()=>{
+  selectedCategory=button.dataset.category;
+  document.querySelectorAll(".filter-btn").forEach(btn=>btn.classList.remove("active"));
+  button.classList.add("active");
+  renderGames();
+ });
+});
+
+searchInput.addEventListener("input",renderGames);
+
+/* WORKING MOBILE MENU */
+const menuOpen=document.getElementById("menuOpen");
+const menuClose=document.getElementById("menuClose");
+const mobileMenu=document.getElementById("mobileMenu");
+const overlay=document.getElementById("overlay");
+
+function openMenu(){
+ mobileMenu.classList.add("active");
+ overlay.classList.add("active");
+ menuOpen.setAttribute("aria-expanded","true");
+ mobileMenu.setAttribute("aria-hidden","false");
+ document.body.style.overflow="hidden";
 }
 
-function setCategory(category,button){
- selectedCategory = category;
- document.querySelectorAll(".filter").forEach(btn =>
-  btn.classList.remove("active")
- );
- button.classList.add("active");
- renderGames();
+function closeMenu(){
+ mobileMenu.classList.remove("active");
+ overlay.classList.remove("active");
+ menuOpen.setAttribute("aria-expanded","false");
+ mobileMenu.setAttribute("aria-hidden","true");
+ document.body.style.overflow="";
 }
+
+menuOpen.addEventListener("click",openMenu);
+menuClose.addEventListener("click",closeMenu);
+overlay.addEventListener("click",closeMenu);
+
+mobileMenu.querySelectorAll("a").forEach(link=>{
+ link.addEventListener("click",closeMenu);
+});
+
+document.addEventListener("keydown",event=>{
+ if(event.key==="Escape")closeMenu();
+});
 
 renderGames();
 </script>
+
 </body>
 </html>
